@@ -30,7 +30,19 @@ public class DataBaseTxt {
         }
     }
 
-    public static boolean Write(String Caminho,String texto){
+    public static boolean writeNewUser(String Caminho,String texto){
+        try {
+            FileWriter arq = new FileWriter(Caminho,true);
+            PrintWriter gravarArq = new PrintWriter(arq);
+            gravarArq.println(texto);
+            gravarArq.close();
+            return true;
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    public static boolean changeUser(String Caminho,String texto){
         try {
             FileWriter arq = new FileWriter(Caminho);
             PrintWriter gravarArq = new PrintWriter(arq);
