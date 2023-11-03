@@ -1,6 +1,6 @@
 public class Requested {
-    int idUserRequest;
-    int idBooksRequest;
+    private int idUserRequest;
+    private int idBooksRequest;
 
     public Requested(int idUserRequest, int idBooksRequest) {
         this.idUserRequest = idUserRequest;

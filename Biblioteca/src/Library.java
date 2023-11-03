@@ -3,12 +3,17 @@ import java.util.*;
 import java.util.List;
 
 public class Library {
-    private String split = "; ";
+    private String split = ";";
+    private static final Scanner scan = new Scanner(System.in);
     List<Books> books = new ArrayList<>();
 
+    User user = new User();
+
+    private static Menus menu = new Menus();
+    String userLogin = "";
+
     public void register() {
-        Scanner scan = new Scanner(System.in);
-        User user = new User();
+
         String file = "User.txt";
         System.out.println("Register");
         System.out.println();
@@ -25,7 +30,6 @@ public class Library {
     }
 
     public void login() {
-
         Scanner scan = new Scanner(System.in);
         System.out.println("Login");
         System.out.println();
@@ -40,64 +44,80 @@ public class Library {
         int userIndex = -1;
 
         for (int i = 0; i < users.size(); i++) {
-                if (users.get(i).userName.equals(username)) {
-                    userIndex = i;
-                    break;
-                }
+            if (users.get(i).userName.equals(username) && users.get(i).password.equals(password)) {
+                userIndex = i;
+                userLogin = users.get(i).userName;
+                break;
+            }
         }
+        System.out.println();
 
         boolean isUserExist = userIndex != -1;
 
         if (isUserExist) {
-            System.out.println("user exists");
-        } else
-        {
-            System.out.println("user not exists");
+            System.out.println("Login successfully");
+            menu.menuBooks();
+        } else {
+            System.out.println("Login not successfully");
         }
-
-        /* else if (seeUser.equals(User.userName) && seeUser.equals(User.password)) {
-                Menus.menuBooks();
-        } else
-            System.out.println(seeUser);
-
-         */
+        System.out.println();
     }
 
 
     public void changeUser() {
+        UserDataBase database = new UserDataBase();
+        List<User> users = database.getAllUsers();
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).userName.equals(userLogin)) {
+            }
+        }
+
+        menu.menuBooks();
+    }
+
+    public void newBooks() {
+        this.books.add(new Books(1, "Nunca fiques onde já não estás!", "Manuel Clemente", "Alma dos livros"));
+        this.books.add(new Books(2, "Elon Musk", "Elon Musk", "\n" + "Objectiva"));
+        this.books.add(new Books(3, "Segredos da Mente Milionária", "T. Harv Eker", "Marcador"));
+        this.books.add(new Books(4, "Nunca Desistas de Ti", "Susana Teixeira", "Oficina do Livro,"));
+        this.books.add(new Books(5, "Do Mil ao Milhão. Sem Cortar o Cafezinho", "Thiago Nigro", "Harper Collins Brasil"));
     }
 
     public void showBooks() {
         Scanner scan = new Scanner(System.in);
-        this.books.add(new Books(1, "Nunca fiques onde já não estás!", "Manuel Clemente", "Nova era"));
-        books.add(new Books(2, "elon Musk", "Elon Musk", "Nova era editora"));
-
+        newBooks();
         for (int i = 0; i < books.size(); i++) {
             System.out.println(books.get(i).idBooks + " " + books.get(i).nameBook);
         }
-        System.out.println("Choise books you want see author");
+
+        System.out.println("Choice books you want see author");
         int choiceAuthor = scan.nextInt();
         for (int i = 0; i < books.size(); i++) {
-            if(books.get(i).idBooks == choiceAuthor){
+            if (books.get(i).idBooks == choiceAuthor) {
                 System.out.println(books.get(i).author);
             }
         }
-        System.out.println("Choise books you want see Publish");
+
+        System.out.println("Choice books you want see Publish");
         int choicePublish = scan.nextInt();
         for (int i = 0; i < books.size(); i++) {
-            if(books.get(i).idBooks == choicePublish){
+            if (books.get(i).idBooks == choicePublish) {
                 System.out.println(books.get(i).publish);
             }
         }
         /*Books findBook = books.stream().filter(x -> x.idBooks == choice).findFirst().orElseThrow();
         System.out.println(findBook.author);
         */
+        menu.menuBooks();
     }
 
     public void dateDelivery() {
-
+        Menus menu = new Menus();
+        menu.menuBooks();
     }
 
     public void showBooksRequited() {
+        Menus menu = new Menus();
+        menu.menuBooks();
     }
 }
