@@ -50,12 +50,12 @@ public class Library {
                 break;
             }
         }
-        System.out.println();
 
         boolean isUserExist = userIndex != -1;
 
         if (isUserExist) {
             System.out.println("Login successfully");
+            System.out.println();
             menu.menuBooks();
         } else {
             System.out.println("Login not successfully");
@@ -77,7 +77,7 @@ public class Library {
 
     public void newBooks() {
         this.books.add(new Books(1, "Nunca fiques onde já não estás!", "Manuel Clemente", "Alma dos livros"));
-        this.books.add(new Books(2, "Elon Musk", "Elon Musk", "\n" + "Objectiva"));
+        this.books.add(new Books(2, "Elon Musk", "Elon Musk",  "Objectiva"));
         this.books.add(new Books(3, "Segredos da Mente Milionária", "T. Harv Eker", "Marcador"));
         this.books.add(new Books(4, "Nunca Desistas de Ti", "Susana Teixeira", "Oficina do Livro,"));
         this.books.add(new Books(5, "Do Mil ao Milhão. Sem Cortar o Cafezinho", "Thiago Nigro", "Harper Collins Brasil"));
@@ -87,27 +87,30 @@ public class Library {
         Scanner scan = new Scanner(System.in);
         newBooks();
         for (int i = 0; i < books.size(); i++) {
-            System.out.println(books.get(i).idBooks + " " + books.get(i).nameBook);
+            System.out.println("ID: " + books.get(i).idBooks + " Books: " + books.get(i).nameBook);
         }
 
         System.out.println("Choice books you want see author");
-        int choiceAuthor = scan.nextInt();
+        String choiceAuthor = scan.next();
         for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).idBooks == choiceAuthor) {
+            if (String.valueOf(books.get(i).idBooks).equals(choiceAuthor)) {
                 System.out.println(books.get(i).author);
             }
+
         }
 
         System.out.println("Choice books you want see Publish");
-        int choicePublish = scan.nextInt();
+        String choicePublish = scan.next();
         for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).idBooks == choicePublish) {
+            if (String.valueOf(books.get(i).idBooks).equals(choicePublish)) {
                 System.out.println(books.get(i).publish);
             }
         }
+
         /*Books findBook = books.stream().filter(x -> x.idBooks == choice).findFirst().orElseThrow();
         System.out.println(findBook.author);
         */
+        System.out.println();
         menu.menuBooks();
     }
 
